@@ -1,23 +1,25 @@
 <template>
   <div>
-    Test
-    <router-link to="/login">Go to Login</router-link>
-    <!-- <router-link to="/home">Go to Home</router-link> -->
+    <app-header />
 
-    <router-view></router-view>
+      <router-view />
 
-    <div id="id">
-      <!-- <page-header /> -->
-    </div>
-
-    <!-- <page-content /> -->
-
-    <!-- <page-footer /> -->
+     <app-footer />
   </div>
 </template>
 
 <script>
+import AppContent from './Components/Content/Content.vue';
+import AppFooter from './Components/Footer/Footer.vue';
+import AppHeader from './Components/Header/Header.vue';
+
 export default {
+  components: {
+    AppContent,
+    AppFooter,
+    AppHeader,
+  },
+
   mounted() {
     console.log(this.$route.params);
     console.log('Component mounted.')
