@@ -1,17 +1,30 @@
-export default [
+const userRoutes = [
     {
-        path: '/profile',
-        component: () => import('../Pages/Private/Profile.vue'),
+        path: '/',
+        name: 'user.profile',
+        component: () => import('../Pages/Private/User/Profile.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: '/events',
-        component: () => import('../Pages/Private/Events.vue'),
+        name: 'user.events',
+        component: () => import('../Pages/Private/User/Events.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: '/services',
-        component: () => import('../Pages/Private/Services.vue'),
+        name: 'user.services',
+        component: () => import('../Pages/Private/User/Services.vue'),
         meta: { requiresAuth: true }
+    },
+];
+
+export default [
+    {
+        path: '/user',
+        name: 'user',
+        component: () => import('../Pages/Private/User/Profile.vue'),
+        meta: { requiresAuth: true },
+        children: userRoutes,
     },
 ];
