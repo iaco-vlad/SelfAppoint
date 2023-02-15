@@ -26,40 +26,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('auth')->group(function () {
+    Route::post('login', [LoginController::class, 'execute']);
+});
 
-Route::prefix('api')->group(function () {
+Route::prefix('user')->group(function () {
+    Route::post('/', [CreateUserController::class, 'execute']);
 
-    Route::prefix('auth')->group(function () {
-        Route::post('login', [LoginController::class, 'execute']);
-    });
+    Route::post('{id}', [UpdateUserController::class, 'execute']);
 
-    Route::prefix('user')->group(function () {
-        Route::post('/', [CreateUserController::class, 'execute']);
+    Route::get('{id}', [GetUserController::class, 'execute']);
+});
 
-        Route::post('{id}', [UpdateUserController::class, 'execute']);
+Route::prefix('service')->group(function () {
+    Route::post('/', [CreateServiceController::class, 'execute']);
 
-        Route::get('{id}', [GetUserController::class, 'execute']);
-    });
+    Route::post('{id}', [UpdateServiceController::class, 'execute']);
 
-    Route::prefix('service')->group(function () {
-        Route::post('/', [CreateServiceController::class, 'execute']);
+    Route::get('{id}', [GetServiceController::class, 'execute']);
 
-        Route::post('{id}', [UpdateServiceController::class, 'execute']);
+    Route::delete('{id}', [DeleteServiceController::class, 'execute']);
+});
 
-        Route::get('{id}', [GetServiceController::class, 'execute']);
+Route::prefix('event')->group(function () {
+    Route::post('/', [CreateEventController::class, 'execute']);
 
-        Route::delete('{id}', [DeleteServiceController::class, 'execute']);
-    });
+    Route::post('{id}', [UpdateEventController::class, 'execute']);
 
-    Route::prefix('event')->group(function () {
-        Route::post('/', [CreateEventController::class, 'execute']);
+    Route::get('{id}', [GetEventController::class, 'execute']);
 
-        Route::post('{id}', [UpdateEventController::class, 'execute']);
-
-        Route::get('{id}', [GetEventController::class, 'execute']);
-
-        Route::delete('{id}', [DeleteEventController::class, 'execute']);
-    });
+    Route::delete('{id}', [DeleteEventController::class, 'execute']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
