@@ -19,11 +19,6 @@ export default {
     AppFooter,
     AppHeader,
   },
-
-  mounted() {
-    console.log(this.$route.params);
-    console.log('Component mounted.')
-  }
 }
 </script>
 

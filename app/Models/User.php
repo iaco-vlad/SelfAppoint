@@ -19,11 +19,15 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string email
  * @property string password
  * @property string phone_number
+ * @property string title
  * @property bool is_admin
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
 
     public $timestamps = true;
 
@@ -32,6 +36,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'phone_number',
+        'title',
+        'is_admin',
+    ];
+
+    protected $visible = [
+        'name',
+        'email',
+        'phone_number',
+        'title',
         'is_admin',
     ];
 

@@ -11,13 +11,15 @@ class CreateUserController extends MainController
 {
     public function execute(...$args): JsonResponse
     {
-        $request = new Request;
-        $user = new User;
+        $request = new Request();
+        $user = new User();
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
 
         $user->save();
+
+        return response()->json([], 201);
     }
 }

@@ -10,7 +10,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 abstract class MainController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * The main execution body
@@ -18,5 +20,5 @@ abstract class MainController extends BaseController
      * @param mixed ...$args
      * @return JsonResponse
      */
-    abstract public function execute(...$args) : JsonResponse;
+    abstract public function execute(...$args): JsonResponse;
 }

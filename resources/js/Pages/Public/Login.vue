@@ -9,7 +9,7 @@
 
             <p class="list-disc text-red-400" v-if="typeof errors === 'string'">{{ errors }}</p>
 
-            <form method="post" @submit.prevent="handleLogin">
+            <form method="post" @submit.prevent="handleSubmit">
                 <div class="login-input-wrapper">
                     <div class="mb-4">
                         <label class="w-50" for="username">
@@ -47,38 +47,48 @@
 </template>
 
 <script>
-
-import { ref, reactive } from 'vue';
-import { useRouter } from 'vue-router';
+import {emailValidator, passwordValidator} from "@/Utils/validators";
+import axios from "axios";
 export default {
-    setup() {
-        const errors = ref()
-        const router = useRouter();
-        const form = reactive({
-            email: '',
-            password: '',
-        })
-        const handleLogin = async () => {
-            try {
-                const result = await axios.post('/api/auth/login', form)
-                if (result.status === 200 && result.data && result.data.token) {
-                    localStorage.setItem('APP_DEMO_USER_TOKEN', result.data.token)
-                    await router.push('home')
-                }
-            } catch (e) {
-                if (e && e.response.data && e.response.data.errors) {
-                    errors.value = Object.values(e.response.data.errors)
-                } else {
-                    errors.value = e.response.data.message || ""
-                }
-            }
-        }
-
+    data() {
         return {
-            form,
-            errors,
-            handleLogin,
+            form: {
+                email: '',
+                password: '',
+            },
         }
+    },
+    methods: {
+        handleSubmit() {
+            if (this.validateForm()) {
+                this.submitForm();
+            }
+        },
+
+        validateForm() {
+            return passwordValidator.test(this.form.password)
+                && emailValidator.test(this.form.email);
+        },
+
+        async submitForm() {
+            try {
+                console.log(this.form);
+                axios.post('/api/auth/login', this.form)
+                    .then(response => {
+                        const credentials = {
+                            token: response.data.token,
+                            user: response.data.user,
+                        };
+                        this.$store.dispatch('setLoginCredentials', credentials);
+                        // console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        },
     }
 }
 </script>
