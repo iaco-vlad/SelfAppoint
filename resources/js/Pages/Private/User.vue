@@ -1,30 +1,16 @@
 <template>
-    <div class="container-fluid">
+    <div class="container shadow-lg py-5">
         <div class="row">
-            <!-- First column: List -->
             <div class="col-md-4">
-                <ul class="list-group">
-                    <router-link v-for="(page, index) in pages" :key="index" :to="{name: page.name}" class="list-group-item">{{ page.title }}</router-link>
+                <!-- List of links -->
+                <ul class="list-group text-center w-50 mx-auto">
+                    <li class="list-group-item"><router-link to="/profile">Profile</router-link></li>
+                    <li class="list-group-item"><router-link to="/events">Events</router-link></li>
+                    <li class="list-group-item"><router-link to="/services">Services</router-link></li>
                 </ul>
             </div>
-            <!-- Second column: Table -->
             <div class="col-md-8">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Header 1</th>
-                        <th>Header 2</th>
-                        <th>Header 3</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(row, index) in tableData" :key="index">
-                        <td>{{ row.col1 }}</td>
-                        <td>{{ row.col2 }}</td>
-                        <td>{{ row.col3 }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <router-view/>
             </div>
         </div>
     </div>

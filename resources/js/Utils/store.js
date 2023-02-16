@@ -8,21 +8,31 @@ export default new Vuex.Store({
     },
     mutations: {
         setLoginCredentials(state, credentials) {
-            console.log('test');
-            console.log(credentials);
-            this.state.token = credentials.token;
-            this.state.token = credentials.user;
+            if (credentials === null) {
+                state.token = state.user = null;
+                return;
+            }
+            state.token = credentials.token;
+            state.user = credentials.user;
         },
     },
     actions: {
-        setLoginCredentials({ commit }, credentials) {
+        setLoginCredentials({commit}, credentials) {
             commit('setLoginCredentials', credentials);
         },
+        logout({commit}) {
+            commit('setLoginCredentials', null);
+        }
     },
     plugins: [
         createPersistedState({
             storage: window.sessionStorage,
-            paths: ['token']
+            paths: ['token', 'user']
         })
-    ]
+    ],
+    getters: {
+        isAuthenticated: state => {
+            return !!state.token;
+        },
+    }
 });

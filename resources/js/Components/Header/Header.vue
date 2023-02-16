@@ -5,7 +5,9 @@
         </div>
 
         <div class="header-profile">
-            <img :src="profileImage" class="header-profile-image" @click="toggleDropdown" alt="Profile image">
+            <span v-if="isAuthenticated">{{ userName }}</span>
+
+            <img :src="profileImage" class="header-profile-image mx-2" @click="toggleDropdown" alt="Profile image">
 
             <ul class="header-profile-dropdown" v-show="dropdownOpen">
                 <template v-if="isAuthenticated">
@@ -53,7 +55,12 @@ export default {
                 : profileImages.unauthenticated;
         },
         isAuthenticated() {
-            return !!this.$store.state.token;
+            return !!this.$store.getters.isAuthenticated;
+        },
+        userName() {
+            // console.log(this.$store.state.user)
+            // console.log(this.$store.state.token)
+            return this.$store.state.user.name;
         },
     },
 };
