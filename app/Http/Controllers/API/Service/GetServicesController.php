@@ -8,16 +8,16 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
-class DeleteServiceController extends MainController
+class GetServicesController extends MainController
 {
     public function execute(...$args): JsonResponse
     {
         $response = [
-            'validationError' => null
+            'services' => []
         ];
         try {
             if ($user = Auth::user()) {
-                Service::where('administrator_id', $user->id)->where('id', $args[0])->delete();
+                $response['services'] = Service::getAllByAdministratorId($user->id);
                 return response()->json($response);
             } else {
                 $response['validationError'] = 'Not authorised';
