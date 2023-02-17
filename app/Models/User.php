@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Collection|Service[] $services
  * @property Collection|Event[] $events
  *
+ * @property int id
  * @property string name
  * @property string email
  * @property string password
@@ -41,6 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $visible = [
+        'id',
         'name',
         'email',
         'phone_number',

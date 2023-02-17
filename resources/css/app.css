@@ -9,6 +9,10 @@ body {
     flex-direction: column;
 }
 
+.form-input{
+    width: 13.125rem;
+}
+
 .input-wrapper {
     width: 30rem;
 }

@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property bool show_timespan
  *
  * @method static getAllByAdministratorId($administratorId)
+ * @method static whereActive()
  *
  * @mixin Builder
  */
@@ -70,6 +71,15 @@ class Service extends Model
     public function administrator(): BelongsTo
     {
         return $this->belongsTo('User', 'administrator_id');
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeWhereActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
     }
 
     /**

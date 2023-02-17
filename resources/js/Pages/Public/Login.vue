@@ -2,13 +2,6 @@
     <div class="shadow-lg text-center">
         <h1 class="py-5"> Login </h1>
 
-        <!--            <ul class="lisc text-red-400" v-for="(value, index) in errors" :key="index"-->
-        <!--                v-if="typeof errors === 'object'">-->
-        <!--                <li>{{ value[0]}}</li>-->
-        <!--            </ul>-->
-
-        <!--            <p class="list-disct-dis text-red-400" v-if="typeof errors === 'string'">{{ errors }}</p>-->
-
         <form class="form-wrapper" method="post" @submit.prevent="handleSubmit">
             <div class="input-wrapper">
                 <div class="mb-4">
@@ -24,9 +17,11 @@
                         Password
                     </label>
                     <input
-                        class="shadow border border-red rounded py-2 px-3 mb-3"
+                        class="shadow border rounded py-2 px-3 mb-3"
                         id="password" type="password" v-model="form.password" required/>
                 </div>
+
+                <p class="text-danger" v-if="error">{{ error }}</p>
             </div>
 
             <div class="flex items-center justify-between mb-5">
@@ -57,20 +52,27 @@ export default {
                 email: '',
                 password: '',
             },
+            error: '',
         }
     },
     methods: {
         handleSubmit() {
+            this.resetErrors();
             if (this.validateForm()) {
                 this.submitForm();
-            } else {
-                // TODO: Add the message to the errors field.
             }
         },
 
         validateForm() {
-            return passwordValidator.test(this.form.password)
-                && emailValidator.test(this.form.email);
+            if (!passwordValidator.regex.test(this.form.password)) {
+                this.error = passwordValidator.message;
+                return false;
+            }
+            if (!emailValidator.regex.test(this.form.email)) {
+                this.error = emailValidator.message;
+                return false;
+            }
+            return true;
         },
 
         async submitForm() {
@@ -82,17 +84,20 @@ export default {
                             user: response.data.user,
                         };
                         this.$store.dispatch('setLoginCredentials', credentials);
-                        // TODO: Redirect to the profile page once its done
+                        this.$router.push({name: 'user.profile'});
                     })
                     .catch(error => {
-                        // TODO: Add 'errors' variable and pin it on the bottom of the form.
-                        // Update it with the value of the response in case of error.
-                        console.log(error)
+                        this.error = error.data.validationError;
+                        console.error(error)
                     });
             } catch (error) {
                 console.error(error);
             }
         },
-    }
+
+        resetErrors() {
+            this.error = '';
+        },
+    },
 }
 </script>

@@ -19,6 +19,8 @@
                 </template>
 
                 <template v-else>
+                    <li><a href="/login" @click.prevent="handleSampleLogin">Sample login</a></li>
+
                     <li><router-link :to="{name: 'login'}">Login</router-link></li>
 
                     <li><router-link :to="{name: 'register'}">Register</router-link></li>
@@ -29,6 +31,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 const profileImages = {
     unauthenticated: '/images/unauthenticated-avatar-placeholder.png',
     authenticated: '/images/authenticated-avatar-placeholder.png',
@@ -46,7 +50,40 @@ export default {
         toggleDropdown() {
             this.dropdownOpen = !this.dropdownOpen;
         },
-        handleSignOut() {} // TODO: Update method
+        handleSignOut() {
+            this.backendLogout();
+            this.$store.dispatch('logout');
+            this.$router.push({name: 'login'});
+        },
+        handleSampleLogin() { // This is for testing purposes only
+            try {
+                const sampleLoginCredentials = {
+                    email: 'randomemailname@vlad-iacovenco.com',
+                    password: 'OhNoNowYouKnowAllMyPasswords1'
+                };
+                axios.post('/api/auth/login', sampleLoginCredentials)
+                    .then(response => {
+                        const credentials = {
+                            token: response.data.token,
+                            user: response.data.user,
+                        };
+                        this.$store.dispatch('setLoginCredentials', credentials);
+                        this.$router.push({name: 'user.profile'});
+                    })
+                    .catch(error => {
+                        this.error = error.data.validationError;
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        backendLogout() {
+            axios.post('/api/auth/logout').then(response => {
+                console.log(response.data.message);
+            }).catch(error => {
+                console.error(error);
+            });
+        }
     },
     computed: {
         profileImage() {
@@ -58,8 +95,6 @@ export default {
             return !!this.$store.getters.isAuthenticated;
         },
         userName() {
-            // console.log(this.$store.state.user)
-            // console.log(this.$store.state.token)
             return this.$store.state.user.name;
         },
     },

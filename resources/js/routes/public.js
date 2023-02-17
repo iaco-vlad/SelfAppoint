@@ -10,7 +10,7 @@ export default [
         component: () => import('../Pages/Public/Register.vue')
     },
     {
-        path: '/new-appointment',
+        path: '/new-appointment/:administratorId',
         name: 'new-appointment',
         component: () => import('../Pages/Public/NewAppointment.vue')
     },

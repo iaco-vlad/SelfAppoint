@@ -16,13 +16,16 @@ class GetServicesController extends MainController
             'services' => []
         ];
         try {
+            if ($administratorId = request()->input('administrator_id')) {
+                $response['services'] = Service::whereActive()->getAllByAdministratorId($administratorId);
+                return response()->json($response);
+            }
             if ($user = Auth::user()) {
                 $response['services'] = Service::getAllByAdministratorId($user->id);
                 return response()->json($response);
-            } else {
-                $response['validationError'] = 'Not authorised';
-                return response()->json($response, 403);
             }
+            $response['validationError'] = 'Not authorised';
+            return response()->json($response, 403);
         } catch (Exception $e) {
             return response()->json($response, 500);
         }

@@ -6,7 +6,7 @@
             <button type="button" class="btn btn-primary mb-3" @click="showCreateModal">Create new service</button>
         </div>
 
-        <table class="table">
+        <table class="table" v-if="services.length">
             <thead>
             <tr>
                 <th>Name</th>
@@ -20,7 +20,7 @@
             <tr v-for="(service, index) in services" :key="service.id">
                 <td>{{ service.name }}</td>
                 <td>{{ service.timespan }}</td>
-                <td>{{ service.is_active ? 'Yes' : 'No' }}</td>
+                <td :class="{'text-success': service.is_active, 'text-danger': !service.is_active}">{{ service.is_active ? 'Yes' : 'No' }}</td>
                 <td>{{ service.show_timespan ? 'Yes' : 'No' }}</td>
                 <td>
                     <button type="button" class="btn btn-primary" @click="showUpdateModal(index)">Update</button>
@@ -29,6 +29,8 @@
             </tr>
             </tbody>
         </table>
+
+        <p class="py-4" v-else>There are no services for your user yet.</p>
 
         <CreateModal
             :show-modal="createModalActive"
@@ -45,7 +47,6 @@
 </template>
 
 <script>
-console.log('test');
 import sampleServices from './ServicesData';
 import CreateModal from './Services/CreateServiceModal.vue'
 import UpdateModal from './Services/UpdateServiceModal.vue'
@@ -64,7 +65,7 @@ export default {
             updateModalActive: false,
         };
     },
-    created() {
+    mounted() {
         this.fetchServices();
     },
     methods: {
@@ -83,14 +84,10 @@ export default {
             this.createModalActive = true;
         },
         showUpdateModal(index) {
-            console.log(index);
             this.selectedService = { ...this.services[index] };
-            console.log(this.selectedService);
             this.updateModalActive = true;
-            console.log(this.updateModalActive);
         },
         confirmDelete(id) {
-            console.log('/api/services/' + id);
             if (confirm('Are you sure you want to delete this service?')) {
                 axios.delete('/api/services/' + id)
                     .then(() => {

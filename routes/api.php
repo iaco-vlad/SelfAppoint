@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\Auth\LoginController;
+use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Event\CreateEventController;
 use App\Http\Controllers\API\Event\DeleteEventController;
 use App\Http\Controllers\API\Event\GetEventController;
@@ -11,7 +13,6 @@ use App\Http\Controllers\API\Service\GetServicesController;
 use App\Http\Controllers\API\Service\UpdateServiceController;
 use App\Http\Controllers\API\User\CreateUserController;
 use App\Http\Controllers\API\User\GetUserController;
-use App\Http\Controllers\API\User\LoginController;
 use App\Http\Controllers\API\User\UpdateUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
     Route::post('login', [LoginController::class, 'execute'])->name('login');
+
+    Route::post('logout', [LogoutController::class, 'execute'])->name('logout');
 
     Route::post('signup', [CreateUserController::class, 'execute']);
 });
