@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import sampleServices from './ServicesData';
 import CreateModal from './Services/CreateServiceModal.vue'
 import UpdateModal from './Services/UpdateServiceModal.vue'
 
@@ -59,7 +58,7 @@ export default {
 
     data() {
         return {
-            services: sampleServices, // array of objects with the properties name, timespan, is_active, and show_timespan
+            services: [],
             selectedService: {},
             createModalActive: false,
             updateModalActive: false,
