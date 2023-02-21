@@ -5,7 +5,9 @@ use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Event\CreateEventController;
 use App\Http\Controllers\API\Event\DeleteEventController;
 use App\Http\Controllers\API\Event\GetEventController;
+use App\Http\Controllers\API\Event\GetEventsController;
 use App\Http\Controllers\API\Event\UpdateEventController;
+use App\Http\Controllers\API\Event\UpdateEventStatusController;
 use App\Http\Controllers\API\Service\CreateServiceController;
 use App\Http\Controllers\API\Service\DeleteServiceController;
 use App\Http\Controllers\API\Service\GetServiceController;
@@ -27,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Public routes
 Route::prefix('auth')->group(function () {
     Route::post('login', [LoginController::class, 'execute'])->name('login');
 
@@ -35,7 +38,11 @@ Route::prefix('auth')->group(function () {
     Route::post('signup', [CreateUserController::class, 'execute']);
 });
 
+Route::prefix('events')->group(function () {
+    Route::post('/', [CreateEventController::class, 'execute']);
+});
 
+// Private routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('users')->group(function () {
         Route::put('{id}', [UpdateUserController::class, 'execute']);
@@ -56,9 +63,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::prefix('events')->group(function () {
-        Route::post('/', [CreateEventController::class, 'execute']);
+        Route::get('/', [GetEventsController::class, 'execute']);
 
         Route::put('{id}', [UpdateEventController::class, 'execute']);
+
+        Route::patch('{id}/update-status', [UpdateEventStatusController::class, 'execute']);
 
         Route::get('{id}', [GetEventController::class, 'execute']);
 

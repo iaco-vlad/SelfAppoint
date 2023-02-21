@@ -9,6 +9,6 @@ class UpdateEventController extends MainController
 {
     public function execute(...$args): JsonResponse
     {
-        // TODO: Implement execute() method.
+        // TODO: add return
     }
 }

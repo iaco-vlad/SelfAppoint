@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,6 +23,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string phone_number
  * @property string title
  * @property bool is_admin
+ *
+ * @mixin Builder
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -64,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function services(): HasMany
     {
-        return $this->hasMany('Service', 'administrator_id');
+        return $this->hasMany(Service::class, 'administrator_id');
     }
 
     /**
@@ -72,6 +75,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function events(): HasMany
     {
-        return $this->hasMany('Event', 'administrator_id');
+        return $this->hasMany(Event::class, 'administrator_id');
     }
 }

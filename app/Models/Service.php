@@ -62,7 +62,7 @@ class Service extends Model
      */
     public function events(): HasMany
     {
-        return $this->hasMany('Event', 'service_id');
+        return $this->hasMany(Event::class, 'service_id');
     }
 
     /**
@@ -70,7 +70,7 @@ class Service extends Model
      */
     public function administrator(): BelongsTo
     {
-        return $this->belongsTo('User', 'administrator_id');
+        return $this->belongsTo(User::class, 'administrator_id');
     }
 
     /**
