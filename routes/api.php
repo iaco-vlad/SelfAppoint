@@ -3,14 +3,10 @@
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Event\CreateEventController;
-use App\Http\Controllers\API\Event\DeleteEventController;
-use App\Http\Controllers\API\Event\GetEventController;
 use App\Http\Controllers\API\Event\GetEventsController;
-use App\Http\Controllers\API\Event\UpdateEventController;
 use App\Http\Controllers\API\Event\UpdateEventStatusController;
 use App\Http\Controllers\API\Service\CreateServiceController;
 use App\Http\Controllers\API\Service\DeleteServiceController;
-use App\Http\Controllers\API\Service\GetServiceController;
 use App\Http\Controllers\API\Service\GetServicesController;
 use App\Http\Controllers\API\Service\UpdateServiceController;
 use App\Http\Controllers\API\User\CreateUserController;
@@ -57,20 +53,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::put('{id}', [UpdateServiceController::class, 'execute']);
 
-        Route::get('{id}', [GetServiceController::class, 'execute']);
-
         Route::delete('{id}', [DeleteServiceController::class, 'execute']);
     });
 
     Route::prefix('events')->group(function () {
         Route::get('/', [GetEventsController::class, 'execute']);
 
-        Route::put('{id}', [UpdateEventController::class, 'execute']);
-
         Route::patch('{id}/update-status', [UpdateEventStatusController::class, 'execute']);
-
-        Route::get('{id}', [GetEventController::class, 'execute']);
-
-        Route::delete('{id}', [DeleteEventController::class, 'execute']);
     });
 });
