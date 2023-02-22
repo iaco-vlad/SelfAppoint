@@ -5,11 +5,17 @@ import sass from 'sass';
 
 export default defineConfig({
     plugins: [
-        vue({
-            refresh: true,
-        }),
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
             refresh: true,
         }),
     ],

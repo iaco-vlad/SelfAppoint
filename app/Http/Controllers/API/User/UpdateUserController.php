@@ -24,7 +24,8 @@ class UpdateUserController extends MainController
                     'password' => 'nullable|string|min:8|regex:/\d/',
                 ]));
                 if (isset($validatedData['password'])) {
-                    if ($user->email === 'randomemailname@vlad-iacovenco.com') { // For testing purposes only.
+                    // FOR TESTING PURPOSES ONLY
+                    if ($user->email === 'randomemailname@self-appoint.vlad-iacovenco.com') {
                         $response['validationError'] = "You cannot change the password of the sample user.";
                         return response()->json($response, 403);
                     }

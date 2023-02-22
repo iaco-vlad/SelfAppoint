@@ -55,6 +55,11 @@ export default {
             error: '',
         }
     },
+    mounted() {
+        if (this.$store.getters.isAuthenticated) {
+            this.$router.push({name: 'user.profile'});
+        }
+    },
     methods: {
         handleSubmit() {
             this.resetErrors();
@@ -87,7 +92,7 @@ export default {
                         this.$router.push({name: 'user.profile'});
                     })
                     .catch(error => {
-                        this.error = error.data.validationError;
+                        this.error = error.response.data.validationError;
                         console.error(error)
                     });
             } catch (error) {

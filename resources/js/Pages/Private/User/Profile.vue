@@ -2,6 +2,12 @@
     <div class="text-center">
         <h1 class="py-5 mr-auto"> Profile </h1>
 
+        <router-link :to="{name: 'new-appointment', params: { administratorId: user.id }}">
+            <a class="btn py-2 px-3 rounded mb-5 border-0" type="button">
+                Check out your appointment page.
+            </a>
+        </router-link>
+
         <form class="form-wrapper" @submit.prevent="handleSubmit">
             <div class="input-wrapper">
                 <div class="mb-4">

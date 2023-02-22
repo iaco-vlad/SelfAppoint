@@ -13,6 +13,7 @@ class GetServicesController extends MainController
     public function execute(...$args): JsonResponse
     {
         $response = [
+            'validationError' => null,
             'services' => []
         ];
         try {

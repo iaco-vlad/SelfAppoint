@@ -32,6 +32,8 @@ class CreateUserController extends MainController
             $user->password = bcrypt($validatedData['password']);
             $user->save();
 
+            $user->sendEmailVerificationNotification();
+
             $response['user'] = $user;
             return response()->json($response, 201);
         } catch (Exception $e) {

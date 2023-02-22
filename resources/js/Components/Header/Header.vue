@@ -55,10 +55,10 @@ export default {
             this.$store.dispatch('logout');
             this.$router.push({name: 'login'});
         },
-        handleSampleLogin() { // This is for testing purposes only
+        handleSampleLogin() { // FOR TESTING PURPOSES ONLY
             try {
                 const sampleLoginCredentials = {
-                    email: 'randomemailname@vlad-iacovenco.com',
+                    email: 'randomemailname@self-appoint.vlad-iacovenco.com',
                     password: 'OhNoNowYouKnowAllMyPasswords1'
                 };
                 axios.post('/api/auth/login', sampleLoginCredentials)
