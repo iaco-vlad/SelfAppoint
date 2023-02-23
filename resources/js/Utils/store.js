@@ -34,5 +34,8 @@ export default new Vuex.Store({
         isAuthenticated: state => {
             return !!state.token;
         },
+        token: state => {
+            return state.token;
+        },
     }
 });
