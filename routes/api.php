@@ -58,7 +58,7 @@ Route::prefix('events')->group(function () {
 });
 
 // Private routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:api']], function () {
     Route::prefix('users')->group(function () {
         Route::put('{id}', [UpdateUserController::class, 'execute']);
     });
