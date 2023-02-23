@@ -1,0 +1,84 @@
+body {
+    margin: 0 0 4.5rem;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-input{
+    width: 13.125rem;
+}
+
+.input-wrapper {
+    width: 30rem;
+}
+
+.input-wrapper .checkbox-input {
+    min-width: 13.125rem;
+    display: inline-block;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: lightcoral;
+}
+
+.header-home {
+    font-size: 1.2rem;
+}
+
+.header-profile {
+    position: relative;
+}
+
+.header-profile-image {
+    width: 3.125rem;
+    height: 3.125rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.header-profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    width: 6.25rem;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    z-index: 10;
+}
+
+.header-profile-dropdown li {
+    margin-bottom: 0.5rem;
+}
+
+.header-profile-dropdown a {
+    color: #333;
+    text-decoration: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4.5rem;
+    background-color: lightcoral;
+    text-align: center;
+}
+
+.modal.show-modal {
+    display: block;
+    background-color: rgba(128, 128, 128, 0.5);
+}

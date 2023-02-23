@@ -1,11 +1,21 @@
 <template>
-  <h1> Hello, Vuejs with Laravel </h1>
+    <div>
+        <app-header/>
+
+        <router-view/>
+
+        <app-footer/>
+    </div>
 </template>
 
 <script>
+import AppFooter from './Components/Footer/Footer.vue';
+import AppHeader from './Components/Header/Header.vue';
+
 export default {
-        mounted() {
-            console.log('Component mounted.')
-    }
+    components: {
+        AppFooter,
+        AppHeader,
+    },
 }
 </script>
