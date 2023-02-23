@@ -34,4 +34,9 @@ export default defineConfig({
             },
         },
     },
+    server: {
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    }
 });

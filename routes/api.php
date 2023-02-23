@@ -43,12 +43,14 @@ Route::prefix('events')->group(function () {
     Route::post('/', [CreateEventController::class, 'execute']);
 });
 
+Route::prefix('users')->group(function () {
+    Route::get('{id}', [GetUserController::class, 'execute']);
+});
+
 // Private routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('users')->group(function () {
         Route::put('{id}', [UpdateUserController::class, 'execute']);
-
-        Route::get('{id}', [GetUserController::class, 'execute']);
     });
 
     Route::prefix('services')->group(function () {
