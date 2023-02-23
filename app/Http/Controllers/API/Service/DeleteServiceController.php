@@ -6,7 +6,6 @@ use App\Http\Controllers\API\MainController;
 use App\Models\Service;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class DeleteServiceController extends MainController
 {
@@ -16,7 +15,7 @@ class DeleteServiceController extends MainController
             'validationError' => null
         ];
         try {
-            if ($user = Auth::user()) {
+            if ($user = request()->user()) {
                 Service::where('administrator_id', $user->id)->where('id', $args[0])->delete();
                 return response()->json($response);
             } else {

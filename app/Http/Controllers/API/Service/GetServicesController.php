@@ -6,7 +6,6 @@ use App\Http\Controllers\API\MainController;
 use App\Models\Service;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class GetServicesController extends MainController
 {
@@ -21,7 +20,7 @@ class GetServicesController extends MainController
                 $response['services'] = Service::whereActive()->getAllByAdministratorId($administratorId);
                 return response()->json($response);
             }
-            if ($user = Auth::user()) {
+            if ($user = request()->user()) {
                 $response['services'] = Service::getAllByAdministratorId($user->id);
                 return response()->json($response);
             }

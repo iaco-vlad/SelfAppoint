@@ -5,10 +5,8 @@ namespace App\Http\Controllers\API\Event;
 use App\Helpers\Enums\EventStatusEnum;
 use App\Http\Controllers\API\MainController;
 use App\Models\Event;
-use App\Models\Service;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class CreateEventController extends MainController
 {
@@ -28,7 +26,7 @@ class CreateEventController extends MainController
                 'description' => 'nullable|string',
             ]);
 
-            if ($user = Auth::user()) {
+            if ($user = request()->user()) {
                 $validatedData['user_id'] = $user->id;
             }
             if (!isset($validatedData['administrator_id'])) {

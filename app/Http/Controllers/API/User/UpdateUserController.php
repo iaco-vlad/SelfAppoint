@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\User;
 use App\Http\Controllers\API\MainController;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class UpdateUserController extends MainController
 {
@@ -16,7 +15,7 @@ class UpdateUserController extends MainController
             'validationError' => null,
         ];
         try {
-            if ($user = Auth::user()) {
+            if ($user = request()->user()) {
                 $validatedData = array_filter(request()->validate([
                     'name' => 'string|max:255',
                     'title' => 'string|max:255',

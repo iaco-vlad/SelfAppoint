@@ -24,14 +24,14 @@ class LoginController extends MainController
             ]);
 
             if (Auth::attempt($validatedData)) {
-                $user = Auth::user();
+                $user = request()->user();
                 if (!$user->hasVerifiedEmail()) {
                     $response['validationError'] = 'Confirm your account from your email before using the app.';
                     return response()->json($response, 403);
                 }
 
                 $response['user'] = $user->toArray();
-                $response['token'] = $user->createToken(session_id())->plainTextToken;
+                $response['token'] = $user->createToken('api_token')->plainTextToken;
                 return response()->json($response);
             } else {
                 $response['validationError'] = 'Invalid email or password.';

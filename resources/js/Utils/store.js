@@ -4,9 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 export default new Vuex.Store({
     state: {
         token: null,
-        user: null,
-        id: null,
-        phone_number: null,
+        user: null
     },
     mutations: {
         setLoginCredentials(state, credentials) {

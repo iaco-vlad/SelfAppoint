@@ -6,7 +6,6 @@ use App\Http\Controllers\API\MainController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use App\Models\Service;
-use Illuminate\Support\Facades\Auth;
 
 class CreateServiceController extends MainController
 {
@@ -18,7 +17,7 @@ class CreateServiceController extends MainController
         ];
 
         try {
-            if ($user = Auth::user()) {
+            if ($user = request()->user()) {
                 $validatedData = request()->validate([
                     'name' => 'required|string|max:255',
                     'timespan' => 'required|integer',

@@ -61,7 +61,7 @@ class UpdateEventStatusController extends MainController
      */
     private function validateStatus(string $status, Event $event): void
     {
-        $loggedUserId = Auth::user()->id;
+        $loggedUserId = request()->user()->id;
 
         switch ($status) {
             case EventStatusEnum::CONFIRMED:

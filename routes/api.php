@@ -47,6 +47,16 @@ Route::prefix('users')->group(function () {
     Route::get('{id}', [GetUserController::class, 'execute']);
 });
 
+Route::prefix('services')->group(function () {
+    Route::get('/', [GetServicesController::class, 'execute']);
+});
+
+Route::prefix('events')->group(function () {
+    Route::get('/', [GetEventsController::class, 'execute']);
+
+    Route::patch('{id}/update-status', [UpdateEventStatusController::class, 'execute']);
+});
+
 // Private routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('users')->group(function () {
@@ -56,7 +66,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('services')->group(function () {
         Route::post('/', [CreateServiceController::class, 'execute']);
 
-        Route::get('/', [GetServicesController::class, 'execute']);
 
         Route::put('{id}', [UpdateServiceController::class, 'execute']);
 
@@ -64,8 +73,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::prefix('events')->group(function () {
-        Route::get('/', [GetEventsController::class, 'execute']);
-
         Route::patch('{id}/update-status', [UpdateEventStatusController::class, 'execute']);
     });
 });

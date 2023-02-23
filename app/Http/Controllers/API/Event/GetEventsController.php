@@ -6,7 +6,6 @@ use App\Http\Controllers\API\MainController;
 use App\Models\Event;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class GetEventsController extends MainController
 {
@@ -17,7 +16,7 @@ class GetEventsController extends MainController
             'validationError' => null,
         ];
         try {
-            if ($user = Auth::user()) {
+            if ($user = request()->user()) {
                 $events = Event::getAllByUserId($user->id);
                 $curatedEvents = $events->toArray();
                 foreach ($events as $key => $event) {

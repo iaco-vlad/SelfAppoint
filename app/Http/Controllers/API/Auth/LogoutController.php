@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Auth;
 use App\Http\Controllers\API\MainController;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends MainController
 {
@@ -16,7 +15,7 @@ class LogoutController extends MainController
             'validationError' => null,
         ];
         try {
-            $user = Auth::user();
+            $user = request()->user();
             $user?->tokens()->delete();
 
             return response()->json($response);
