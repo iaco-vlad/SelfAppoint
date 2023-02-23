@@ -25,17 +25,6 @@ export default defineConfig({
             '~': require('path').resolve(__dirname, 'resources/sass'),
         },
     },
-    build: {
-        outDir: 'public',
-        assetsDir: '',
-        manifest: true,
-        rollupOptions: {
-            input: {
-                app: './resources/js/app.js',
-                bootstrap: './resources/js/bootstrap.js'
-            }
-        }
-    },
     css: {
         css: {
             preprocessorOptions: {

@@ -116,7 +116,6 @@ export default {
             try {
                 axios.get('/api/users/' + this.user.id)
                     .then(response => {
-                    console.log(response.data.user)
                         this.formData.name = response.data.user.name;
                         this.formData.title = response.data.user.title;
                         this.formData.phone_number = response.data.user.phone_number;

@@ -54,12 +54,12 @@ class UpdateEventStatusController extends MainController
     }
 
     /**
-     * @param $status
-     * @param $event
+     * @param string $status
+     * @param Event $event
      * @return void
      * @throws Exception
      */
-    private function validateStatus($status, $event): void
+    private function validateStatus(string $status, Event $event): void
     {
         $loggedUserId = Auth::user()->id;
 
@@ -72,6 +72,8 @@ class UpdateEventStatusController extends MainController
                 if ($event->isInThePast) {
                     throw new Exception(self::INCORRECT_TIMESPAN);
                 }
+                // TODO: Send nofication email to the user.
+//                User::find($event->user_id)->;
                 break;
             case EventStatusEnum::CANCELED:
                 if ($loggedUserId !== $event->user_id) {

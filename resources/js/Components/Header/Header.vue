@@ -78,8 +78,7 @@ export default {
             }
         },
         backendLogout() {
-            axios.post('/api/auth/logout').then(response => {
-                console.log(response.data.message);
+            axios.post('/api/auth/logout').then(() => {
             }).catch(error => {
                 console.error(error);
             });
