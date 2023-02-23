@@ -19,7 +19,9 @@ window.axios.interceptors.request.use(function (config) {
     return config;
 });
 
-window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+if (document.querySelector('meta[name="csrf-token"]')) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+}
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import 'bootstrap/dist/css/bootstrap.css';
