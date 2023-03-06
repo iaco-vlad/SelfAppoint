@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API\User;
 
-use App\Http\Controllers\API\MainController;
+use App\Http\Controllers\API\MainMiddlewareController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
-class UpdateUserController extends MainController
+class UpdateUserController extends MainMiddlewareController
 {
     public function execute(...$args): JsonResponse
     {
