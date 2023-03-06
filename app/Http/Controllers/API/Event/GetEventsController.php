@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\Event;
 
-use App\Http\Controllers\API\MainController;
+use App\Http\Controllers\API\MainMiddlewareController;
 use App\Models\Event;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
-class GetEventsController extends MainController
+class GetEventsController extends MainMiddlewareController
 {
     public function execute(...$args): JsonResponse
     {

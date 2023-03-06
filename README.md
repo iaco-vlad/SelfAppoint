@@ -7,11 +7,27 @@
 - Laravel Sanctum
 - Laravel Mailer
 
-# #Live app
+# #Live app:
 https://self-appoint.vlad-iacovenco.com/
+
+<details>
+  <summary>About the project</summary>
+
+- <a href="https://www.laravelsd.com/share/dVpheo" target="_blank"> Database structure. </a>
+  
+- <a href="https://www.laravelsd.com/share/dVpheo" target="_blank"> Technical information. </a>
+</details>
+
+<details>
+  <summary>DB and API information</summary>
+
+- <a href="https://www.laravelsd.com/share/dVpheo" target="_blank"> Database structure. </a>
 
 - <a href="https://api.postman.com/collections/25871294-67fc8791-fcdf-4bd1-a616-bfc124eb2399?access_key=PMAT-01GSZ68PX6YF7M3280BKB1XR6X" target="_blank"> Postman collection. </a>
 <img src="https://raw.githubusercontent.com/iaco-vlad/SelfAppoint/master/Demo/Postman collection.png" width="200" alt="Home">
+
+</details>
+
 
 ## Demo screenshots
 

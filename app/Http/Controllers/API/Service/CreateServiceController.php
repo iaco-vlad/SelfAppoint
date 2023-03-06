@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\Service;
 
-use App\Http\Controllers\API\MainController;
+use App\Http\Controllers\API\MainMiddlewareController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use App\Models\Service;
 
-class CreateServiceController extends MainController
+class CreateServiceController extends MainMiddlewareController
 {
     public function execute(...$args): JsonResponse
     {

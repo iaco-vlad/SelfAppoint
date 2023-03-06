@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\Service;
 
-use App\Http\Controllers\API\MainController;
+use App\Http\Controllers\API\MainMiddlewareController;
 use App\Models\Service;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
-class DeleteServiceController extends MainController
+class DeleteServiceController extends MainMiddlewareController
 {
     public function execute(...$args): JsonResponse
     {
